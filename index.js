@@ -93,6 +93,8 @@ const actions = {
 const firstEntityValue = (entities, entity) => {
   console.log("ENTITIES: " + JSON.stringify(entities));
   console.log("ENTITIES: " + entities["intent"]);
+
+  return "kha";
   /*
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
@@ -103,7 +105,6 @@ const firstEntityValue = (entities, entity) => {
     return null;
   }
   return typeof val === 'object' ? val.value : val;
-  */
 };
 
 
