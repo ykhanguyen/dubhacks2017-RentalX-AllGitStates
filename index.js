@@ -174,11 +174,11 @@ app.post('/webhook', (req, res) => {
 
             request(options,(err,resp,body)=>{                          
                 console.log(body);
-                 fbMessage(sender, body);
+                 fbMessage(sender, body).catch(console.error);
             });
 
            
-            .catch(console.error);
+            
           } else if (text) {
             
             wit.runActions(
