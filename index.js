@@ -76,12 +76,11 @@ function firstEntityValue (entities, entity) {
                     console.log("bodyyyy",JSON.stringify(body[0]));
                     retVal = body[0];
                     //console.log("body0"+body.City);
-                     //fbMessage(sender, body).catch(console.error);
+                     fbMessage('1357452157649271', body).catch(console.error);
                  }
                  return JSON.stringify(retVal);
               });
   //console.log("ENTITIES: " + entities["intent"]);
-
 
   return JSON.stringify(retVal);
   /*
