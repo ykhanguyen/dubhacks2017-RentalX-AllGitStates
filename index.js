@@ -116,7 +116,7 @@ const firstEntityValue = (entities, entity) => {
     }
   }
 
-  let options = getTenFuelEconomy(1);
+  let options = getTenFuelEconomy("best");
   /*
   if (bestfuel)
     options = getTenFuelEconomy(1);
