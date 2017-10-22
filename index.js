@@ -7,6 +7,24 @@ const fetch = require('node-fetch');
 const request = require('request');
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
+var FB = require('fb');
+FB.options({version: 'v2.10'});
+
+var cognitiveServices = require('cognitive-services');
+
+var client = new cognitiveServices.computerVision({
+    apiKey: "c7da4d27b2ad4a948a286cafcdf9dc2a",
+    endpoint: "westus.api.cognitive.microsoft.com"
+});
+
+var parameters = {
+    "visualFeatures": "ImageType,Faces,Adult,Categories,Color,Tags,Description",
+    "details": "Celebrities,Landmarks"
+};
+
+var headers = {
+  'Content-type': 'application/json'
+};
 
 // Webserver parameter
 const PORT = process.env.PORT || 5000;
@@ -27,13 +45,54 @@ function firstEntityValue (entities, entity) {
   console.log("ENTITIES: " + JSON.stringify(entities));
   var result = entities;
   let options = null;
+  var isDone = false;
   if (result["best"]) {
     if (result["best"][0]["confidence"] >= 0.90) {
       options = getTenFuelEconomy("best");
     }
-  } else {
+  } else if (result["suggestion"] && result["suggestion"][0]["confidence"] >= 0.90) {
+    // TODO: pull wit.ai here
+    getSuggestion();
+    isDone = true;
+  } 
+  else {
     options = getTenSavingCar("best");
   }
+  var retVal;
+
+  function getSuggestion() {
+    FB.setAccessToken('EAACEdEose0cBAP99xd0eYt99lfkmq3G1kFtjISTsl198ut6kjIUZB2aNbx3oP7iBKHXd33A2VQa5vvyrgT9kLNNqcXK6gcsejRwmZChI04n9jNTUcdz0q0yNZADGgQZC5sZC1k6DiwZCvP1Wc7SrBbEUzqhw7woGGVnc3PxbQzOTqKaObFAx0HHtnaIvikezcbpft1BIGwgwZDZD');
+
+    FB.api(
+    '/me',
+    'GET',
+    {"fields":"photos{images}"},
+      function(response) {
+          // Insert your code here
+          var images = response["photos"]["data"];
+
+          for (var i = 0; i < 3; i++) {
+            console.log(images[i]["images"][0]["source"]);
+            var body = {
+            "url": images[i]["images"][0]["source"]
+          };
+
+          client.analyzeImage({
+              parameters,
+              headers,
+              body
+          }).then((response) => {
+              console.log(response);
+          });
+          }
+
+      }
+    );
+
+    // TODO: fix here
+    retVal = "hello";
+  }
+
   function getTenFuelEconomy(rank) {
       return {
           "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/annual-fuel-costs",
@@ -64,8 +123,8 @@ function firstEntityValue (entities, entity) {
   } else if (saving car) {
     options = getTenSavingCar(1);
   } */
-  var retVal;
-  request(options,(err,resp,body)=>{      
+  if (!isDone) {
+    request(options,(err,resp,body)=>{      
                 body = JSON.parse(body);
 
                 if (body.length <= 0) {
@@ -79,6 +138,9 @@ function firstEntityValue (entities, entity) {
                      fbMessage('1357452157649271', JSON.stringify(retVal)).catch(console.error);
                  }
               });
+
+    
+  }
   //console.log("ENTITIES: " + entities["intent"]);
 
   return JSON.stringify(retVal);
