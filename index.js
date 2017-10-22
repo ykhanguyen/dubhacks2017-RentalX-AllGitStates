@@ -93,8 +93,10 @@ function firstEntityValue (entities, entity) {
                 let option2 = suggestion(age, gender, sport, travel);
 
                 function suggestion(age, gender, sport, travel) {
+                  url = "http://127.0.0.1:5000/" + age + "/0.8/1/" + gender + "/" + sport + "/" + travel;
+                  console.log("URL: " + url);
                   return {
-                    "url": "http://127.0.0.1:5000/" + age + "/0.8/1/" + gender + "/" + sport + "/" + travel,
+                    "url": url,
                     "method": "GET",
                   }
                 }
