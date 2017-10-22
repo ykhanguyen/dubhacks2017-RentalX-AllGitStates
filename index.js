@@ -86,13 +86,14 @@ const actions = {
   },
   anything({context, entities}) {
     firstEntityValue(entities, 'word');
+    context.message = "";
     return context;
   }
 };
 
 const firstEntityValue = (entities, entity) => {
   console.log("ENTITIES: " + JSON.stringify(entities));
-  console.log("ENTITIES: " + entities["intent"]);
+  //console.log("ENTITIES: " + entities["intent"]);
   return "kha";
   /*
   const val = entities && entities[entity] &&
