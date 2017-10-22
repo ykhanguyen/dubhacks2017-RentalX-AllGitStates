@@ -65,7 +65,7 @@ const findOrCreateSession = (fbid) => {
 };
 
 const actions = {
-  let recipientId = null;
+  var recipientId = null;
   send({sessionId}, {text}) {
     recipientId = sessions[sessionId].fbid;
     if (recipientId) {
