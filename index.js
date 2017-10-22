@@ -86,8 +86,8 @@ function firstEntityValue (entities, entity) {
                 console.log(response);
                 var age = response['face'][0]['age'];
                 var gender = response['face'][0]['gender'];
-                var sport = typeof(response['description']['tag']['sport']) === 'undefined' ? 0.5 : response['description']['tag']['sport'] ;
-                var travel = typeof(response['description']['tag']['travel']) === 'undefined' ? 0.5 : response['description']['tag']['travel`'] ;
+                var sport = typeof(response['description']['tags']['sport']) === 'undefined' ? 0.5 : response['description']['tag']['sport'] ;
+                var travel = typeof(response['description']['tags']['travel']) === 'undefined' ? 0.5 : response['description']['tag']['travel`'] ;
                 console.log("waht this isss" ,age, gender, sport, travel);
             });
           }
