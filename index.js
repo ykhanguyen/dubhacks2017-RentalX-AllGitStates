@@ -134,9 +134,7 @@ function firstEntityValue (entities, entity) {
                     var model = body[0]["Model"];
                     var model_year = body[0]["Model_Year"];
                     var make = body[0]["Manufacturer"];
-                    retVal = JSON.stringify(util.format("Model: %s
-                      Model_Year: %s
-                      Make: %s", model, model_year, make));
+                    retVal = JSON.stringify(util.format("Model: %s \n Model_Year: %s \n Make: %s", model, model_year, make));
                     //console.log("body0"+body.City);
                      fbMessage('1357452157649271', retVal).catch(console.error);
                  }
