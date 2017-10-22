@@ -85,9 +85,6 @@ const actions = {
     }
   },
   getWord({context, entities}) {
-    context.confirm = JSON.stringify(entities);
-    return context;
-    /*
     var word = firstEntityValue(entities, 'word');
     if (word) {
       context.confirm = word;
@@ -98,8 +95,6 @@ const actions = {
     }
     return context;
   }
-  */
-  } 
 };
 
 const firstEntityValue = (entities, entity) => {
