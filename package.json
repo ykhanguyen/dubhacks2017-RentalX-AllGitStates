@@ -18,10 +18,11 @@
   "homepage": "https://github.com/WRProject/Server#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cognitive-services": "^0.3.2",
     "express": "^4.14.0",
+    "fb": "^2.0.0",
     "node-wit": "^4.2.0",
     "request": "^2.79.0",
-    "fb": "^2.0.0",
-    "cognitive-services": "^0.3.2"
+    "util": "^0.10.3"
   }
 }
