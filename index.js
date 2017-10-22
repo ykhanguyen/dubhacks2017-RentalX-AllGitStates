@@ -86,8 +86,7 @@ const actions = {
   },
   anything({context, entities}) {
     //console.log("i'm receipt",recipientId);
-    firstEntityValue(entities, 'word');
-    context.message = "yeah";
+    context.message = firstEntityValue(entities, 'word');
     console.log("context messageeess",context.message);
     console.log("context", context);
     return context;
@@ -150,6 +149,9 @@ const firstEntityValue = (entities, entity) => {
                      //fbMessage(sender, body).catch(console.error);
                  }
               });
+  while (!retVal) {
+
+  }
   //console.log("ENTITIES: " + entities["intent"]);
   return JSON.stringify(retVal);
   /*
