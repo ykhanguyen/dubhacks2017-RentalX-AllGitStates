@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
+const util = require('util');
 var FB = require('fb');
 FB.options({version: 'v2.10'});
 
