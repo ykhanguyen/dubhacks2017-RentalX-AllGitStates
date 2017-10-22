@@ -144,7 +144,7 @@ const firstEntityValue = (entities, entity) => {
                   //var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
                   //". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
                     console.log("bodyyyy",body);
-                    retVal = body;
+                    retVal = body[0];
                     //console.log("body0"+body.City);
                      //fbMessage(sender, body).catch(console.error);
                  }
