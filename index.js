@@ -108,6 +108,7 @@ const actions = {
   }
 };
 const firstEntityValue = (entities, entity) => {
+  console.log("ENTITIES: " + entities);
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
     entities[entity].length > 0 &&
