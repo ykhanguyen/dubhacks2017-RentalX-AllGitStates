@@ -92,8 +92,15 @@ const actions = {
 
 const firstEntityValue = (entities, entity) => {
   console.log("ENTITIES: " + JSON.stringify(entities));
-
-
+  var result = entities;
+  let options = null;
+  if (result["best"]) {
+    if (result["best"][0]["confidence"] >= 0.90) {
+      options = getTenFuelEconomy("best");
+    }
+  } else {
+    options = getTenSavingCar("best");
+  }
   function getTenFuelEconomy(rank) {
       return {
           "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/annual-fuel-costs",
@@ -116,7 +123,7 @@ const firstEntityValue = (entities, entity) => {
     }
   }
 
-  let options = getTenFuelEconomy("best");
+  
   /*
   if (bestfuel)
     options = getTenFuelEconomy(1);
