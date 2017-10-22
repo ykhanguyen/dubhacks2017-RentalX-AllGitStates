@@ -7,7 +7,6 @@ const fetch = require('node-fetch');
 const request = require('request');
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
-var sender;
 
 // Webserver parameter
 const PORT = process.env.PORT || 5000;
@@ -86,8 +85,7 @@ const actions = {
     }
   },
   anything({context, entities}) {
-    firstEntityValue(entities, 'word');
-    context.message = "";
+    context.message = firstEntityValue(entities, 'word');
     return context;
   }
 };
@@ -126,7 +124,7 @@ const firstEntityValue = (entities, entity) => {
   } else if (saving car) {
     options = getTenSavingCar(1);
   } */
-
+  var retVal;
   request(options,(err,resp,body)=>{      
                 body = JSON.parse(body);
 
@@ -136,12 +134,13 @@ const firstEntityValue = (entities, entity) => {
                   //var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
                   //". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
                     console.log(body);
+                    retVal = body;
                     //console.log("body0"+body.City);
-                     fbMessage(sender, body).catch(console.error);
+                     //fbMessage(sender, body).catch(console.error);
                  }
               });
   //console.log("ENTITIES: " + entities["intent"]);
-  return "kha";
+  return retVal;
   /*
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
@@ -191,7 +190,7 @@ app.post('/webhook', (req, res) => {
       entry.messaging.forEach(event => {
         if (event.message && !event.message.is_echo) {
           console.log(event.message);
-          sender = event.sender.id;
+          const sender = event.sender.id;
 
           const sessionId = findOrCreateSession(sender);
 
