@@ -82,7 +82,6 @@ function firstEntityValue (entities, entity) {
               });
   //console.log("ENTITIES: " + entities["intent"]);
 
-  while (retVal == null) {}
 
   return JSON.stringify(retVal);
   /*
