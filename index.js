@@ -158,54 +158,56 @@ app.post('/webhook', (req, res) => {
               //fbMessage(sender, "Error in reading data. ").catch(console.error);
             
             if (attachments == null || attachments.length <= 0 || attachments[0]['payload'] == null && attachments[0]['payload']['coordinates'] == null) {
-            }
+              fbMessage(sender, "I do not understand this type of data. Sorry!!").catch(console.error);
+            } else {
 
-            var lat = attachments[0]['payload']['coordinates'].lat;
-            var long = attachments[0]['payload']['coordinates'].long;
+              var lat = attachments[0]['payload']['coordinates'].lat;
+              var long = attachments[0]['payload']['coordinates'].long;
 
-            let options = getParkingInfo(lat, long);
+              let options = getParkingInfo(lat, long);
 
 
-            function getParkingInfo(lat, long) {
-              return {
-                "url": "https://apis.solarialabs.com/shine/v1/parking-rules/meters",
-                "method": "GET",
-                "qs": {
-                  "lat": lat,
-                    "long": long,
-                    "apikey": "dpAeTEA7PbFCC8zt5fW5CmqStFmRAid6"
+              function getParkingInfo(lat, long) {
+                return {
+                  "url": "https://apis.solarialabs.com/shine/v1/parking-rules/meters",
+                  "method": "GET",
+                  "qs": {
+                    "lat": lat,
+                      "long": long,
+                      "apikey": "dpAeTEA7PbFCC8zt5fW5CmqStFmRAid6"
+                  }
                 }
               }
+
+              request(options,(err,resp,body)=>{      
+                body = JSON.parse(body);
+                var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
+                ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
+                  console.log(body);
+                  console.log("body0"+body.City);
+                   fbMessage(sender, returnOutput).catch(console.error);
+              });
+            } else if (text) {
+              
+              wit.runActions(
+                sessionId, // the user's current session
+                text, // the user's message
+                sessions[sessionId].context // the user's current session state
+              ).then((context) => {
+                
+                console.log('Waiting for next user messages');
+
+                
+                // if (context['done']) {
+                //   delete sessions[sessionId];
+                // }
+
+                sessions[sessionId].context = context;
+              })
+              .catch((err) => {
+                console.error('Oops! Got an error from Wit: ', err.stack || err);
+              })
             }
-
-            request(options,(err,resp,body)=>{      
-              body = JSON.parse(body);
-              var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
-              ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
-                console.log(body);
-                console.log("body0"+body.City);
-                 fbMessage(sender, returnOutput).catch(console.error);
-            });
-          } else if (text) {
-            
-            wit.runActions(
-              sessionId, // the user's current session
-              text, // the user's message
-              sessions[sessionId].context // the user's current session state
-            ).then((context) => {
-              
-              console.log('Waiting for next user messages');
-
-              
-              // if (context['done']) {
-              //   delete sessions[sessionId];
-              // }
-
-              sessions[sessionId].context = context;
-            })
-            .catch((err) => {
-              console.error('Oops! Got an error from Wit: ', err.stack || err);
-            })
           }
         } else {
           console.log('received event', JSON.stringify(event));
