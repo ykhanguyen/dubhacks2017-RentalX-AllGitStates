@@ -142,6 +142,7 @@ const findOrCreateSession = (fbid) => {
 const actions = {
   send({sessionId}, {text}) {
     const recipientId = sessions[sessionId].fbid;
+    console.log("MY ID: " + recipientId);
     if (recipientId) {
       
       return fbMessage(recipientId, text)
