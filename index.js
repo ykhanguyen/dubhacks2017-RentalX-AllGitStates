@@ -155,8 +155,9 @@ app.post('/webhook', (req, res) => {
             // We received an attachment
             // Let's reply with an automatic message
             //fbMessage(sender, "returnOutput").catch(console.error);
-              //fbMessage(sender, "Error in reading data. ").catch(console.error);
+              fbMessage(sender, "Error in reading data. ").catch(console.error);
               
+              /*
               if (attachments == null || attachments.length <= 0 || attachments[0]['payload'] == null || attachments[0]['payload']['coordinates'] == null) {
                 fbMessage(sender, "I do not understand this type of data. Sorry!!").catch(console.error);
               } else {
@@ -188,6 +189,7 @@ app.post('/webhook', (req, res) => {
                    fbMessage(sender, returnOutput).catch(console.error);
               });
             }
+            */
             
           } else if (text) {
             
