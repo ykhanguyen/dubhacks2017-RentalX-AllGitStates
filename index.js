@@ -132,11 +132,11 @@ const firstEntityValue = (entities, entity) => {
                 if (body.length <= 0) {
                   fbMessage(sender, "Invalid output.").catch(console.error);
                 } else {
-                  var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
-                  ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
+                  //var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
+                  //". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
                     console.log(body);
-                    console.log("body0"+body.City);
-                     fbMessage(sender, returnOutput).catch(console.error);
+                    //console.log("body0"+body.City);
+                     fbMessage(sender, body).catch(console.error);
                  }
               });
   //console.log("ENTITIES: " + entities["intent"]);
