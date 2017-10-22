@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
-const sender;
+var sender;
 
 // Webserver parameter
 const PORT = process.env.PORT || 5000;
