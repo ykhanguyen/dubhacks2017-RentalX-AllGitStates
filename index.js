@@ -84,13 +84,11 @@ function firstEntityValue (entities, entity) {
             }).then((response) => {
                 // TODO: print out to facebook here
                 console.log(response);
-                console.log("adault", response['adult']);
-                // response = JSON.parse(response);
-                // var age = response['face'][0]['age'];
-                // var gender = response['face'][0]['gender'];
-                // var sport = typeof(response['description']['tag']['sport']) === 'undefined' ? 0.5 : response['description']['tag']['sport'] ;
-                // var travel = typeof(response['description']['tag']['travel']) === 'undefined' ? 0.5 : response['description']['tag']['travel`'] ;
-                // console.log("waht this isss" ,age, gender, sport, travel);
+                var age = response['face'][0]['age'];
+                var gender = response['face'][0]['gender'];
+                var sport = typeof(response['description']['tag']['sport']) === 'undefined' ? 0.5 : response['description']['tag']['sport'] ;
+                var travel = typeof(response['description']['tag']['travel']) === 'undefined' ? 0.5 : response['description']['tag']['travel`'] ;
+                console.log("waht this isss" ,age, gender, sport, travel);
             });
           }
 
