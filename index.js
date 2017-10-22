@@ -99,8 +99,7 @@ function firstEntityValue (entities, entity) {
                   }
                 }
 
-                request(option2,(err,resp,body)=>{
-                  res.send(body);                             
+                request(option2,(err,resp,body)=>{                        
                     console.log(body);
                     fbMessage('1357452157649271', body).catch(console.error);
                 });
