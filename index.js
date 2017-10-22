@@ -65,8 +65,9 @@ const findOrCreateSession = (fbid) => {
 };
 
 const actions = {
+  const recipientId = null;
   send({sessionId}, {text}) {
-    const recipientId = sessions[sessionId].fbid;
+    recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       
       return fbMessage(recipientId, text)
@@ -147,7 +148,7 @@ const firstEntityValue = (entities, entity) => {
                  }
               });
   //console.log("ENTITIES: " + entities["intent"]);
-  return retVal;
+  return JSON.stringify(retVal);
   /*
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
