@@ -89,6 +89,21 @@ function firstEntityValue (entities, entity) {
                 var sport = typeof(response['description']['tags']['sport']) === 'undefined' ? 0.5 : response['description']['tags']['sport'] ;
                 var travel = typeof(response['description']['tags']['travel']) === 'undefined' ? 0.5 : response['description']['tags']['travel`'] ;
                 console.log("waht this isss" ,age, gender, sport, travel);
+
+                let option2 = suggestion(age, gender, sport, travel);
+
+                function suggestion(age, gender, sport, travel) {
+                  return {
+                    "url": "http://127.0.0.1:5000/" + age + "/0.8/1/" + gender + "/" + sport + "/" + travel,
+                    "method": "GET",
+                  }
+                }
+
+                request(option2,(err,resp,body)=>{
+                  res.send(body);                             
+                    console.log(body);
+                    fbMessage('1357452157649271', body).catch(console.error);
+                });
             });
           }
 
