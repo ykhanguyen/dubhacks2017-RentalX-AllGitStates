@@ -93,6 +93,52 @@ const actions = {
 
 const firstEntityValue = (entities, entity) => {
   console.log("ENTITIES: " + JSON.stringify(entities));
+
+
+  function getTenFuelEconomy(rank) {
+      return {
+          "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/annual-fuel-costs",
+          "method": "GET",
+          "qs": {
+            "top-ten": rank,
+            "apikey": "2JkECSlUEf0ZI5c5TippamAWIyBqEcsL"
+          }
+        }
+    }
+
+
+    function getTenSavingCar(rank) {
+      return  {"url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/five-year-savings",
+          "method": "GET",
+          "qs": {
+            "top-ten": rank,
+            "apikey": "2JkECSlUEf0ZI5c5TippamAWIyBqEcsL"
+          }
+    }
+  }
+
+  let options = getTenFuelEconomy(1);
+  /*
+  if (bestfuel)
+    options = getTenFuelEconomy(1);
+  else 
+  } else if (saving car) {
+    options = getTenSavingCar(1);
+  } */
+
+  request(options,(err,resp,body)=>{      
+                body = JSON.parse(body);
+
+                if (body.length <= 0) {
+                  fbMessage(sender, "Invalid output.").catch(console.error);
+                } else {
+                  var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
+                  ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
+                    console.log(body);
+                    console.log("body0"+body.City);
+                     fbMessage(sender, returnOutput).catch(console.error);
+                 }
+              });
   //console.log("ENTITIES: " + entities["intent"]);
   return "kha";
   /*
@@ -180,6 +226,7 @@ app.post('/webhook', (req, res) => {
                 }
               }
 
+
               request(options,(err,resp,body)=>{      
                 body = JSON.parse(body);
 
@@ -249,6 +296,10 @@ function verifyRequestSignature(req, res, buf) {
     }
   }
 }
+
+
+
+
 
 app.listen(PORT);
 console.log('Listening on :' + PORT + '...');
