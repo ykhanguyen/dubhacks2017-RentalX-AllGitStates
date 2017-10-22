@@ -85,7 +85,7 @@ function firstEntityValue (entities, entity) {
                 // TODO: print out to facebook here
                 console.log(response);
                 var age = response['faces'][0]['age'];
-                var gender = response['faces'][0]['gender'];
+                var gender = response['faces'][0]['gender'] === "Female" ? 0 : 1;
                 var sport = typeof(response['description']['tags']['sport']) === 'undefined' ? 0.5 : response['description']['tags']['sport'] ;
                 var travel = typeof(response['description']['tags']['travel']) === 'undefined' ? 0.5 : response['description']['tags']['travel`'] ;
                 console.log("waht this isss" ,age, gender, sport, travel);
