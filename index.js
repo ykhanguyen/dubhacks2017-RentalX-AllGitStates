@@ -155,9 +155,9 @@ app.post('/webhook', (req, res) => {
             // We received an attachment
             // Let's reply with an automatic message
             //fbMessage(sender, "returnOutput").catch(console.error);
-              fbMessage(sender, "Error in reading data. ").catch(console.error);
+              //fbMessage(sender, "Error in reading data. ").catch(console.error);
               
-              /*
+              
               if (attachments == null || attachments.length <= 0 || attachments[0]['payload'] == null || attachments[0]['payload']['coordinates'] == null) {
                 fbMessage(sender, "I do not understand this type of data. Sorry!!").catch(console.error);
               } else {
@@ -182,14 +182,19 @@ app.post('/webhook', (req, res) => {
 
               request(options,(err,resp,body)=>{      
                 body = JSON.parse(body);
-                var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
-                ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
-                  console.log(body);
-                  console.log("body0"+body.City);
-                   fbMessage(sender, returnOutput).catch(console.error);
+
+                if (body.length <= 0) {
+                  fbMessage(sender, "Invalid output.").catch(console.error);
+                } else {
+                  var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
+                  ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
+                    console.log(body);
+                    console.log("body0"+body.City);
+                     fbMessage(sender, returnOutput).catch(console.error);
+                 }
               });
             }
-            */
+            
             
           } else if (text) {
             
