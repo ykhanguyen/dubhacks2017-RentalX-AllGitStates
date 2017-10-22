@@ -85,7 +85,7 @@ const actions = {
     }
   },
   getWord({context, entities}) {
-    var word = firstEntityValue(entities, 'word');
+    var word = firstEntityValue(entities, 'color');
     if (word) {
       context.confirm = word;
       delete context.missingWord;
