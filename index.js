@@ -135,6 +135,7 @@ app.get('/webhook/', function (req, res) {
 
 
 // Message handler
+/*
 app.post('/webhook', (req, res) => {
   const data = req.body;
 
@@ -217,6 +218,7 @@ app.post('/webhook', (req, res) => {
   }
   res.sendStatus(200);
 });
+*/
 
 
 function verifyRequestSignature(req, res, buf) {
