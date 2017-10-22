@@ -86,7 +86,7 @@ const actions = {
   },
   anything({context, entities}) {
     firstEntityValue(entities, 'word');
-    return "yeah~";
+    return context;
   }
 };
 
