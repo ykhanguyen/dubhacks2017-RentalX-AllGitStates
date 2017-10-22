@@ -86,10 +86,16 @@ const actions = {
   },
   anything({context, entities}) {
     //console.log("i'm receipt",recipientId);
+
+    return firstEntityValue(entities, 'word').then(function(res) {
+      context.message = res;
+      return context;
+    });
+    /*
     context.message = firstEntityValue(entities, 'word');
     console.log("context messageeess",context.message);
     console.log("context", context);
-    return context;
+    return context;*/
   }
 };
 
@@ -148,11 +154,12 @@ function firstEntityValue (entities, entity) {
                     //console.log("body0"+body.City);
                      //fbMessage(sender, body).catch(console.error);
                  }
+                 return JSON.stringify(retVal);
               });
   //console.log("ENTITIES: " + entities["intent"]);
 
   while (retVal == null) {}
-    
+
   return JSON.stringify(retVal);
   /*
   const val = entities && entities[entity] &&
