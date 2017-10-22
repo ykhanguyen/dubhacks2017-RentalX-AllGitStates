@@ -72,18 +72,18 @@ function firstEntityValue (entities, entity) {
           var images = response["photos"]["data"];
 
           for (var i = 0; i < 3; i++) {
-            console.log(images[i]["images"][0]["source"]);
+            console.log("IMAGE LINK: " + images[i]["images"][0]["source"]);
             var body = {
-            "url": images[i]["images"][0]["source"]
-          };
+              "url": images[i]["images"][0]["source"]
+            };
 
-          client.analyzeImage({
-              parameters,
-              headers,
-              body
-          }).then((response) => {
-              console.log(response);
-          });
+            client.analyzeImage({
+                parameters,
+                headers,
+                body
+            }).then((response) => {
+                console.log(response);
+            });
           }
 
       }
