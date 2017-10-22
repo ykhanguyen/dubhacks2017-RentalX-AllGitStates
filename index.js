@@ -100,7 +100,7 @@ function firstEntityValue (entities, entity) {
                 }
 
                 request(option2,(err,resp,body)=>{                        
-                    console.log(body);
+                    console.log("SUGGESTION LOG", body);
                     fbMessage('1357452157649271', body).catch(console.error);
                 });
             });
