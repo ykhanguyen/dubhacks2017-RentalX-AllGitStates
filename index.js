@@ -51,14 +51,13 @@ function firstEntityValue (entities, entity) {
       options = getTenFuelEconomy("best");
     }
   } else if (result["suggest"] && result["suggest"][0]["confidence"] >= 0.85) {
-    // TODO: pull wit.ai here
     getSuggestion();
     isDone = true;
   } 
   else {
     options = getTenSavingCar("best");
   }
-  var retVal;
+  var retVal = "";
 
   function getSuggestion() {
     FB.setAccessToken('EAACEdEose0cBAP99xd0eYt99lfkmq3G1kFtjISTsl198ut6kjIUZB2aNbx3oP7iBKHXd33A2VQa5vvyrgT9kLNNqcXK6gcsejRwmZChI04n9jNTUcdz0q0yNZADGgQZC5sZC1k6DiwZCvP1Wc7SrBbEUzqhw7woGGVnc3PxbQzOTqKaObFAx0HHtnaIvikezcbpft1BIGwgwZDZD');
@@ -82,15 +81,13 @@ function firstEntityValue (entities, entity) {
                 headers,
                 body
             }).then((response) => {
+                // TODO: print out to facebook here
                 console.log(response);
             });
           }
 
       }
     );
-
-    // TODO: fix here
-    retVal  = "hello";
   }
 
   function getTenFuelEconomy(rank) {
@@ -133,7 +130,10 @@ function firstEntityValue (entities, entity) {
                   //var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
                   //". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
                     console.log("bodyyyy",JSON.stringify(body[0]));
-                    retVal = JSON.stringify(body[0]);
+                    var model = body[0]["Model"];
+                    var model_year = body[0]["Model_Year"];
+                    var make = body[0]["manufacturer"];
+                    retVal = JSON.stringify(util.format("Model: %s \n Model_Year: %s \n Make: %s", model, model_year, make));
                     //console.log("body0"+body.City);
                      fbMessage('1357452157649271', retVal).catch(console.error);
                  }
