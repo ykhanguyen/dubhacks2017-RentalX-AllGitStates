@@ -47,10 +47,10 @@ function firstEntityValue (entities, entity) {
   let options = null;
   var isDone = false;
   if (result["best"]) {
-    if (result["best"][0]["confidence"] >= 0.90) {
+    if (result["best"][0]["confidence"] >= 0.85) {
       options = getTenFuelEconomy("best");
     }
-  } else if (result["suggestion"] && result["suggestion"][0]["confidence"] >= 0.90) {
+  } else if (result["suggest"] && result["suggest"][0]["confidence"] >= 0.85) {
     // TODO: pull wit.ai here
     getSuggestion();
     isDone = true;
