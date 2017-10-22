@@ -90,7 +90,7 @@ function firstEntityValue (entities, entity) {
     );
 
     // TODO: fix here
-    retVal = "hello";
+    retVal  = "hello";
   }
 
   function getTenFuelEconomy(rank) {
@@ -133,9 +133,9 @@ function firstEntityValue (entities, entity) {
                   //var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
                   //". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
                     console.log("bodyyyy",JSON.stringify(body[0]));
-                    retVal = body[0];
+                    retVal = JSON.stringify(body[0]);
                     //console.log("body0"+body.City);
-                     fbMessage('1357452157649271', JSON.stringify(retVal)).catch(console.error);
+                     fbMessage('1357452157649271', retVal).catch(console.error);
                  }
               });
 
@@ -143,7 +143,7 @@ function firstEntityValue (entities, entity) {
   }
   //console.log("ENTITIES: " + entities["intent"]);
 
-  return JSON.stringify(retVal);
+  return retVal;
   /*
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
