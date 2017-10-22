@@ -153,9 +153,31 @@ app.post('/webhook', (req, res) => {
           if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
-            console.log(attachments[0]['payload']['coordinates'].lat);
-            console.log(attachments[0]['payload']['coordinates'].long);
-            fbMessage(sender, 'Sorry I can only process text messages for now.')
+
+            var lat = attachments[0]['payload']['coordinates'].lat;
+            var long = attachments[0]['payload']['coordinates'].long;
+
+            let options = getParkingInfo(lat, long);
+
+
+            function getParkingInfo(lat, long) {
+              return {
+                "url": "https://apis.solarialabs.com/shine/v1/parking-rules/meters",
+                "method": "GET",
+                "qs": {
+                  "lat": lat,
+                    "long": long,
+                    "apikey": "dpAeTEA7PbFCC8zt5fW5CmqStFmRAid6"
+                }
+              }
+            }
+
+            request(options,(err,resp,body)=>{                          
+                console.log(body);
+                 fbMessage(sender, body);
+            });
+
+           
             .catch(console.error);
           } else if (text) {
             
