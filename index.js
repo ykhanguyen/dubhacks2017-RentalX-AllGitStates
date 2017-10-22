@@ -172,9 +172,11 @@ app.post('/webhook', (req, res) => {
               }
             }
 
-            request(options,(err,resp,body)=>{                          
-                console.log(body);
-                 fbMessage(sender, body).catch(console.error);
+            request(options,(err,resp,body)=>{      
+              var returnOutput = "Hours of operation: " + body[0]["Hours_of_Operation"] + ". Exception location: " + body[0]["Exceptions_Location"] +". Peak Time: " + body[0]["Peak_Time"] +
+              ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
+                console.log(returnOutput);
+                 fbMessage(sender, returnOutput).catch(console.error);
             });
 
            
