@@ -163,18 +163,18 @@ const actions = {
   anything({context, entities}) {
     //console.log("i'm receipt",recipientId);
 
-    
+    /*
     return firstEntityValue(entities, 'word').then(function(res) {
       context.message = res;
       return context;
     });
+    */
     
-    /*
     firstEntityValue(entities, 'word');
     context.message = "";
     console.log("context messageeess",context.message);
     console.log("context", context);
-    return context; */
+    return context; 
   }
 };
 
@@ -263,6 +263,7 @@ app.post('/webhook', (req, res) => {
                   ". Smart Meter: "  + body[0]["Smart_Meter"] + ". Rate: " + body[0]["Rate"];                  
                     console.log(body);
                     console.log("body0"+body.City);
+                    console.log("SENDER ID = " + sender);
                      fbMessage(sender, returnOutput).catch(console.error);
                  }
               });
