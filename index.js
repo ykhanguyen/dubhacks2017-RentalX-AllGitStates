@@ -23,82 +23,6 @@ if (!FB_APP_SECRET) { throw new Error('missing FB_APP_SECRET') }
 let FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
 if (!FB_VERIFY_TOKEN) { throw new Error('missing FB_VERIFY_TOKEN') }
 
-// ----------------------------------------------------------------------------
-// Messenger API 
-
-const fbMessage = (id, text) => {
-  const body = JSON.stringify({
-    recipient: { id },
-    message: { text },
-  });
-  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-  return fetch('https://graph.facebook.com/me/messages?' + qs, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body,
-  })
-  .then(rsp => rsp.json())
-  .then(json => {
-    if (json.error && json.error.message) {
-      throw new Error(json.error.message);
-    }
-    return json;
-  });
-};
-
-// ----------------------------------------------------------------------------
-
-const sessions = {};
-
-const findOrCreateSession = (fbid) => {
-  let sessionId;
-  Object.keys(sessions).forEach(k => {
-    if (sessions[k].fbid === fbid) {
-      sessionId = k;
-    }
-  });
-  if (!sessionId) {
-    sessionId = new Date().toISOString();
-    sessions[sessionId] = {fbid: fbid, context: {}};
-  }
-  return sessionId;
-};
-
-const actions = {
-  send({sessionId}, {text}) {
-    const recipientId = sessions[sessionId].fbid;
-    if (recipientId) {
-      
-      return fbMessage(recipientId, text)
-      .then(() => null)
-      .catch((err) => {
-        console.error(
-          'Oops! An error occurred while forwarding the response to',
-          recipientId,
-          ':',
-          err.stack || err
-        );
-      });
-    } else {
-      console.error('Oops! Couldn\'t find user for session:', sessionId);
-      return Promise.resolve()
-    }
-  },
-  anything({context, entities}) {
-    //console.log("i'm receipt",recipientId);
-
-    return firstEntityValue(entities, 'word').then(function(res) {
-      context.message = res;
-      return context;
-    });
-    /*
-    context.message = firstEntityValue(entities, 'word');
-    console.log("context messageeess",context.message);
-    console.log("context", context);
-    return context;*/
-  }
-};
-
 function firstEntityValue (entities, entity) {
   console.log("ENTITIES: " + JSON.stringify(entities));
   var result = entities;
@@ -173,6 +97,85 @@ function firstEntityValue (entities, entity) {
   return typeof val === 'object' ? val.value : val;
   */
 };
+
+// ----------------------------------------------------------------------------
+// Messenger API 
+
+const fbMessage = (id, text) => {
+  const body = JSON.stringify({
+    recipient: { id },
+    message: { text },
+  });
+  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+  return fetch('https://graph.facebook.com/me/messages?' + qs, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body,
+  })
+  .then(rsp => rsp.json())
+  .then(json => {
+    if (json.error && json.error.message) {
+      throw new Error(json.error.message);
+    }
+    return json;
+  });
+};
+
+// ----------------------------------------------------------------------------
+
+const sessions = {};
+
+
+const findOrCreateSession = (fbid) => {
+  let sessionId;
+  Object.keys(sessions).forEach(k => {
+    if (sessions[k].fbid === fbid) {
+      sessionId = k;
+    }
+  });
+  if (!sessionId) {
+    sessionId = new Date().toISOString();
+    sessions[sessionId] = {fbid: fbid, context: {}};
+  }
+  return sessionId;
+};
+
+const actions = {
+  send({sessionId}, {text}) {
+    const recipientId = sessions[sessionId].fbid;
+    if (recipientId) {
+      
+      return fbMessage(recipientId, text)
+      .then(() => null)
+      .catch((err) => {
+        console.error(
+          'Oops! An error occurred while forwarding the response to',
+          recipientId,
+          ':',
+          err.stack || err
+        );
+      });
+    } else {
+      console.error('Oops! Couldn\'t find user for session:', sessionId);
+      return Promise.resolve()
+    }
+  },
+  anything({context, entities}) {
+    //console.log("i'm receipt",recipientId);
+
+    return firstEntityValue(entities, 'word').then(function(res) {
+      context.message = res;
+      return context;
+    });
+    /*
+    context.message = firstEntityValue(entities, 'word');
+    console.log("context messageeess",context.message);
+    console.log("context", context);
+    return context;*/
+  }
+};
+
+
 
 
 const wit = new Wit({
