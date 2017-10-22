@@ -99,6 +99,7 @@ const actions = {
     return context;
   }
   */
+  } 
 };
 
 const firstEntityValue = (entities, entity) => {
