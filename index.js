@@ -86,14 +86,15 @@ const actions = {
   },
   anything({context, entities}) {
     //console.log("i'm receipt",recipientId);
-    context.message = firstEntityValue(entities, 'word');
+    firstEntityValue(entities, 'word');
+    context.message = "yeah";
     console.log("context messageeess",context.message);
     console.log("context", context);
     return context;
   }
 };
 
-function firstEntityValue (entities, entity) {
+const firstEntityValue = (entities, entity) => {
   console.log("ENTITIES: " + JSON.stringify(entities));
   var result = entities;
   let options = null;
