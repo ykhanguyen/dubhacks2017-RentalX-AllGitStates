@@ -87,6 +87,8 @@ const actions = {
   anything({context, entities}) {
     //console.log("i'm receipt",recipientId);
     context.message = firstEntityValue(entities, 'word');
+    console.log("context messageeess",context.message);
+    console.log("context", context);
     return context;
   }
 };
