@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
+const sender;
 
 // Webserver parameter
 const PORT = process.env.PORT || 5000;
@@ -190,7 +191,7 @@ app.post('/webhook', (req, res) => {
       entry.messaging.forEach(event => {
         if (event.message && !event.message.is_echo) {
           console.log(event.message);
-          const sender = event.sender.id;
+          sender = event.sender.id;
 
           const sessionId = findOrCreateSession(sender);
 
