@@ -93,7 +93,7 @@ const actions = {
   }
 };
 
-const firstEntityValue = (entities, entity) => {
+function firstEntityValue (entities, entity) {
   console.log("ENTITIES: " + JSON.stringify(entities));
   var result = entities;
   let options = null;
@@ -149,10 +149,10 @@ const firstEntityValue = (entities, entity) => {
                      //fbMessage(sender, body).catch(console.error);
                  }
               });
-  while (!retVal) {
-
-  }
   //console.log("ENTITIES: " + entities["intent"]);
+
+  while (retVal == null) {}
+    
   return JSON.stringify(retVal);
   /*
   const val = entities && entities[entity] &&
