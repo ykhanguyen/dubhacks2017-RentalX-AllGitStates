@@ -84,6 +84,7 @@ function firstEntityValue (entities, entity) {
             }).then((response) => {
                 // TODO: print out to facebook here
                 console.log(response);
+                console.log("adault", response['adult']);
                 // response = JSON.parse(response);
                 // var age = response['face'][0]['age'];
                 // var gender = response['face'][0]['gender'];
