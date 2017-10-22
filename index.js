@@ -153,6 +153,7 @@ app.post('/webhook', (req, res) => {
           if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
+            fbMessage(sender, "returnOutput").catch(console.error);
 
             var lat = attachments[0]['payload']['coordinates'].lat;
             var long = attachments[0]['payload']['coordinates'].long;
