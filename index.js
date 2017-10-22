@@ -108,7 +108,8 @@ const actions = {
   }
 };
 const firstEntityValue = (entities, entity) => {
-  console.log("ENTITIES: " + entities);
+  console.log("ENTITIES: " + JSON.parse(entities));
+  console.log(entities["intent"]);
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
     entities[entity].length > 0 &&
