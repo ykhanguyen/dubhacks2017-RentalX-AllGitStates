@@ -142,6 +142,7 @@ app.post('/webhook', (req, res) => {
     data.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         if (event.message && !event.message.is_echo) {
+          console.log(event.message);
           const sender = event.sender.id;
 
           const sessionId = findOrCreateSession(sender);
