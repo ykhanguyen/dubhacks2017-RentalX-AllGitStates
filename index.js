@@ -84,22 +84,16 @@ const actions = {
       return Promise.resolve()
     }
   },
-  getWord({context, entities}) {
-    var word = firstEntityValue(entities, 'word');
-    if (word) {
-      context.confirm = word;
-      delete context.missingWord;
-    } else {
-      context.missingWord = true;
-      delete context.confirm;
-    }
-    return context;
+  anything({context, entities}) {
+    firstEntityValue(entities, 'word');
+    return "yeah~";
   }
 };
 
 const firstEntityValue = (entities, entity) => {
   console.log("ENTITIES: " + JSON.stringify(entities));
   console.log("ENTITIES: " + entities["intent"]);
+  /*
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
     entities[entity].length > 0 &&
@@ -109,6 +103,7 @@ const firstEntityValue = (entities, entity) => {
     return null;
   }
   return typeof val === 'object' ? val.value : val;
+  */
 };
 
 
