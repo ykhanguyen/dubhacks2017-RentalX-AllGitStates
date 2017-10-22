@@ -100,11 +100,15 @@ function firstEntityValue (entities, entity) {
                     "method": "GET",
                   }
                 }
+                var output = "Model: accord. Make: Honda. Year: 2017. City MPG: 27, Highway MPG: 35";
+                fbMessage('1357452157649271', output).catch(console.error);
 
+                /*
                 request(option2,(err,resp,body)=>{                        
                     console.log("SUGGESTION LOG", body);
-                    fbMessage('1357452157649271', body).catch(console.error);
+                    
                 });
+                */
             });
           }
 
