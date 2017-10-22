@@ -162,18 +162,18 @@ const actions = {
   anything({context, entities}) {
     //console.log("i'm receipt",recipientId);
 
-    /*
+    
     return firstEntityValue(entities, 'word').then(function(res) {
       context.message = res;
       return context;
     });
-    */
-
+    
+    /*
     firstEntityValue(entities, 'word');
     context.message = "";
     console.log("context messageeess",context.message);
     console.log("context", context);
-    return context;
+    return context; */
   }
 };
 
