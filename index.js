@@ -14,8 +14,8 @@ FB.options({version: 'v2.10'});
 var cognitiveServices = require('cognitive-services');
 
 var client = new cognitiveServices.computerVision({
-    apiKey: "c7da4d27b2ad4a948a286cafcdf9dc2a",
-    endpoint: "westus.api.cognitive.microsoft.com"
+    apiKey: "xxx",
+    endpoint: "xxx"
 });
 
 var parameters = {
