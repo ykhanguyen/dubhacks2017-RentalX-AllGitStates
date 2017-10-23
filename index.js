@@ -61,7 +61,7 @@ function firstEntityValue (entities, entity) {
   var retVal = "";
 
   function getSuggestion() {
-    FB.setAccessToken('EAACEdEose0cBAOPUvHufZBO9VfYToj4cFPbzZAy63VtPMQis12KvPAPPfqJH4LFbPwnIQZCzIiuhuLsZC6ivC2mYiJ31E6kRZCr5IgqPR98OvT33OfgoiY2rN8hniizWYdZAhrycxZBpWHPLYlIh6b4oolj8NvAh1hESUESnWcQA2SDWY4Qw9VCHZBdXkpzvrB0ZD');
+    FB.setAccessToken('EAACEdEose0cBAGem4sf5vxbC5QwtGYgoo56qb6Pn3AiRumYd5ZCIdc72AaNtSxWiidwcY4VyeqlkZBW6xwZCs4vpwDUZB01OHcry2SzpyvPkNxnH1canWvZAYoltWa9bzmYr7C1Qyek0PXVfMTxD5DYxBLFVqHRx1YISfRY3FFQMx3J2TqFXHNmK22onL6HMZD');
 
     FB.api(
     '/me',
